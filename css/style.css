@@ -1,0 +1,286 @@
+/* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #000;
+    color: #0f0;
+    font-family: 'Courier New', Courier, monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+.binary-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.binary {
+    position: absolute;
+    color: rgba(0, 255, 0, 0.1);
+    font-size: 1.8rem;
+    user-select: none;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateY(100vh);
+    }
+}
+
+.container {
+    text-align: center;
+    background-color: rgba(17, 17, 17, 0.9);
+    padding: 2rem;
+    border: 2px solid #0f0;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+    z-index: 1;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 10px #0f0;
+}
+
+/* استایل بخش لوگو و قیمت BNB */
+.bnb-price-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 1.5rem;
+}
+
+.bnb-logo {
+    width: 30px;
+    height: 30px;
+}
+
+.bnb-price {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 1.2rem;
+    color: #0f0;
+    text-shadow: 0 0 10px #0f0;
+}
+
+.usd-symbol {
+    font-size: 0.9rem;
+    color: #0f0;
+    text-shadow: 0 0 10px #0f0;
+}
+
+.tick-box {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #0f0;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #0f0;
+    font-size: 0.9rem;
+    text-shadow: 0 0 10px #0f0;
+}
+
+.timer {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: #0f0;
+    text-shadow: 0 0 10px #0f0;
+}
+
+.search-box {
+    margin-bottom: 1.5rem;
+}
+
+#search-input {
+    width: 500px;
+    padding: 10px;
+    font-size: 1.2rem;
+    background-color: #000;
+    color: #0f0;
+    border: 2px solid #0f0;
+    border-radius: 5px;
+    text-align: center;
+    outline: none;
+}
+
+.controls {
+    margin-bottom: 1.5rem;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #000;
+    color: #0f0;
+    border: 2px solid #0f0;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0 10px;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background-color: #0f0;
+    color: #000;
+    box-shadow: 0 0 10px #0f0;
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: #000;
+    color: #0f0;
+}
+
+.result {
+    font-size: 1.2rem;
+    color: #0f0;
+    text-shadow: 0 0 10px #0f0;
+    margin-top: 1.5rem;
+}
+
+#result-text {
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* متن را در وسط قرار می‌دهد */
+}
+
+#status-indicator {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: red; /* رنگ اولیه قرمز */
+    margin-left: 10px;
+    animation: blink 1s infinite; /* انیمیشن چشمک‌زن */
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* حالت دایره سبز */
+#status-indicator.green {
+    background-color: #0f0; /* رنگ سبز */
+    animation: none; /* غیرفعال کردن انیمیشن */
+}
+
+#target-line {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    font-size: 1rem;
+    background-color: #000;
+    color: #0f0;
+    border: 2px solid #0f0;
+    border-radius: 5px;
+    resize: none;
+    margin-bottom: 0.5rem;
+}
+
+#copy-btn {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    background-color: #000;
+    color: #0f0;
+    border: 2px solid #0f0;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#copy-btn:hover {
+    background-color: #0f0;
+    color: #000;
+    box-shadow: 0 0 10px #0f0;
+}
+
+#copy-message {
+    margin-top: 0.5rem;
+    font-size: 1rem;
+    color: #0f0;
+    text-shadow: 0 0 10px #0f0;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+#copy-message.visible {
+    opacity: 1;
+}
+
+.hidden {
+    display: none;
+}
+
+/* بخش دانلود کیف پول */
+.download-section {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.download-section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #0f0;
+    text-shadow: 0 0 10px #0f0;
+}
+
+.wallet-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem; /* فاصله بین لینک‌ها */
+    flex-wrap: nowrap; /* جلوگیری از شکستن خط */
+}
+
+.wallet-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #0f0;
+    font-size: 0.9rem; /* اندازه فونت کوچک‌تر */
+    transition: all 0.3s ease;
+    padding: 8px 16px; /* اندازه یکسان برای هر دو دکمه */
+    border: 2px solid #0f0;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.7);
+    white-space: nowrap; /* جلوگیری از شکستن متن */
+    width: 120px; /* عرض یکسان برای هر دو دکمه */
+    justify-content: center; /* متن و تصویر در مرکز قرار گیرند */
+}
+
+.wallet-link:hover {
+    color: #000;
+    background-color: #0f0;
+    box-shadow: 0 0 10px #0f0;
+}
+
+.wallet-link img {
+    width: 20px; /* اندازه تصویر کوچک‌تر */
+    height: 20px; /* اندازه تصویر کوچک‌تر */
+    margin-right: 8px; /* فاصله بین تصویر و متن */
+}
