@@ -15,6 +15,7 @@ body {
     height: 100vh;
     overflow: hidden;
     position: relative;
+    text-align: center; /* Center align text */
 }
 
 .binary-background {
@@ -45,13 +46,16 @@ body {
 }
 
 .container {
-    text-align: center;
+    text-align: center; /* Center align text */
     background-color: rgba(17, 17, 17, 0.9);
     padding: 2rem;
     border: 2px solid #0f0;
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
     z-index: 1;
+    margin: 0 auto; /* Center the container */
+    max-width: 800px; /* Limit width for desktop */
+    width: 90%; /* Relative width for mobile */
 }
 
 h1 {
@@ -60,11 +64,11 @@ h1 {
     text-shadow: 0 0 10px #0f0;
 }
 
-/* استایل بخش لوگو و قیمت BNB */
+/* BNB Logo and Price Section */
 .bnb-price-section {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: center; /* Center align items */
     gap: 10px;
     margin-bottom: 1.5rem;
 }
@@ -114,19 +118,22 @@ h1 {
 }
 
 #search-input {
-    width: 500px;
+    width: 100%;
     padding: 10px;
     font-size: 1.2rem;
     background-color: #000;
     color: #0f0;
     border: 2px solid #0f0;
     border-radius: 5px;
-    text-align: center;
+    text-align: center; /* Center align text */
     outline: none;
 }
 
 .controls {
     margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: center; /* Center align buttons */
+    gap: 10px; /* Space between buttons */
 }
 
 button {
@@ -137,7 +144,6 @@ button {
     border: 2px solid #0f0;
     border-radius: 5px;
     cursor: pointer;
-    margin: 0 10px;
     transition: all 0.3s ease;
 }
 
@@ -165,7 +171,7 @@ button:disabled {
     margin-bottom: 0.5rem;
     display: flex;
     align-items: center;
-    justify-content: center; /* متن را در وسط قرار می‌دهد */
+    justify-content: center; /* Center align text */
 }
 
 #status-indicator {
@@ -173,9 +179,9 @@ button:disabled {
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background-color: red; /* رنگ اولیه قرمز */
+    background-color: red;
     margin-left: 10px;
-    animation: blink 1s infinite; /* انیمیشن چشمک‌زن */
+    animation: blink 1s infinite;
 }
 
 @keyframes blink {
@@ -183,10 +189,9 @@ button:disabled {
     50% { opacity: 0; }
 }
 
-/* حالت دایره سبز */
 #status-indicator.green {
-    background-color: #0f0; /* رنگ سبز */
-    animation: none; /* غیرفعال کردن انیمیشن */
+    background-color: #0f0;
+    animation: none;
 }
 
 #target-line {
@@ -200,6 +205,7 @@ button:disabled {
     border-radius: 5px;
     resize: none;
     margin-bottom: 0.5rem;
+    text-align: center; /* Center align text */
 }
 
 #copy-btn {
@@ -237,10 +243,10 @@ button:disabled {
     display: none;
 }
 
-/* بخش دانلود کیف پول */
+/* Wallet Download Section */
 .download-section {
     margin-top: 2rem;
-    text-align: center;
+    text-align: center; /* Center align text */
 }
 
 .download-section h2 {
@@ -252,9 +258,9 @@ button:disabled {
 
 .wallet-links {
     display: flex;
-    justify-content: center;
-    gap: 1rem; /* فاصله بین لینک‌ها */
-    flex-wrap: nowrap; /* جلوگیری از شکستن خط */
+    justify-content: center; /* Center align links */
+    gap: 1rem;
+    flex-wrap: wrap; /* Allow wrapping for mobile */
 }
 
 .wallet-link {
@@ -262,15 +268,15 @@ button:disabled {
     align-items: center;
     text-decoration: none;
     color: #0f0;
-    font-size: 0.9rem; /* اندازه فونت کوچک‌تر */
+    font-size: 0.9rem;
     transition: all 0.3s ease;
-    padding: 8px 16px; /* اندازه یکسان برای هر دو دکمه */
+    padding: 8px 16px;
     border: 2px solid #0f0;
     border-radius: 5px;
     background-color: rgba(0, 0, 0, 0.7);
-    white-space: nowrap; /* جلوگیری از شکستن متن */
-    width: 120px; /* عرض یکسان برای هر دو دکمه */
-    justify-content: center; /* متن و تصویر در مرکز قرار گیرند */
+    white-space: nowrap;
+    width: 120px;
+    justify-content: center; /* Center align text and icon */
 }
 
 .wallet-link:hover {
@@ -280,7 +286,82 @@ button:disabled {
 }
 
 .wallet-link img {
-    width: 20px; /* اندازه تصویر کوچک‌تر */
-    height: 20px; /* اندازه تصویر کوچک‌تر */
-    margin-right: 8px; /* فاصله بین تصویر و متن */
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+    body {
+        overflow: auto; /* Enable scrolling on mobile */
+        height: auto; /* Auto height for mobile */
+        padding: 20px 0; /* Add padding to top and bottom */
+    }
+
+    .container {
+        width: 100%; /* Full width on mobile */
+        padding: 1rem; /* Reduce padding for mobile */
+        border-radius: 0; /* Remove border-radius for mobile */
+        box-shadow: none; /* Remove shadow for mobile */
+    }
+
+    h1 {
+        font-size: 1.8rem; /* Reduce font size for mobile */
+    }
+
+    /* BNB Price, Logo, and Checkmark Box */
+    .bnb-price-section {
+        flex-direction: row; /* Horizontal layout */
+        gap: 10px; /* Space between elements */
+    }
+
+    .bnb-price {
+        font-size: 1rem; /* Reduce font size */
+    }
+
+    .timer {
+        font-size: 1.5rem; /* Reduce font size */
+    }
+
+    #search-input {
+        width: 100%; /* Full width on mobile */
+        font-size: 1rem; /* Reduce font size */
+    }
+
+    /* Buttons in a horizontal layout */
+    .controls {
+        flex-direction: row; /* Horizontal layout */
+        gap: 10px; /* Space between buttons */
+    }
+
+    button {
+        width: auto; /* Auto width for buttons */
+        margin: 0; /* Remove margin */
+    }
+
+    .result {
+        font-size: 1rem; /* Reduce font size */
+    }
+
+    #target-line {
+        height: 80px; /* Reduce height */
+        font-size: 0.9rem; /* Reduce font size */
+    }
+
+    .download-section h2 {
+        font-size: 1.2rem; /* Reduce font size */
+    }
+
+    /* Wallet Download Links in a horizontal layout */
+    .wallet-links {
+        flex-direction: row; /* Horizontal layout */
+        gap: 10px; /* Space between links */
+    }
+
+    .wallet-link {
+        width: auto; /* Auto width for links */
+        padding: 10px; /* Increase padding */
+        font-size: 0.8rem; /* Reduce font size */
+    }
 }
