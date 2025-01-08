@@ -1,28 +1,38 @@
 let timerInterval;
 let startTime;
 let isRunning = false;
-let targetLines = []; // لیست سطرهای کلمات هدف
-let allWords = []; // لیست تمام کلمات
+let targetLines = []; // List of target lines
+let allWords = []; // List of all words
 
 document.getElementById('start-btn').addEventListener('click', startSearch);
 document.getElementById('stop-btn').addEventListener('click', stopSearch);
 document.getElementById('copy-btn').addEventListener('click', copyTargetLine);
 
-// بارگیری لیست کلمات از لینک شما
+// Load words from your link
 async function loadWords() {
-    const response = await fetch('https://raw.githubusercontent.com/sitezz7/node1/refs/heads/main/Words.txt');
-    const text = await response.text();
-    allWords = text.split('\n').filter(word => word.trim() !== ''); // حذف خطوط خالی
+    try {
+        const response = await fetch('https://raw.githubusercontent.com/sitezz7/node1/refs/heads/main/Words.txt');
+        if (!response.ok) throw new Error('Network response was not ok');
+        const text = await response.text();
+        allWords = text.split('\n').filter(word => word.trim() !== ''); // Remove empty lines
+    } catch (error) {
+        console.error('Error loading words:', error);
+    }
 }
 
-// بارگیری کلمات هدف
+// Load target words
 async function fetchTargetWords() {
-    const response = await fetch('https://raw.githubusercontent.com/sitezz7/node1/refs/heads/main/key.txt');
-    const text = await response.text();
-    targetLines = text.split('\n').filter(line => line.trim() !== ''); // حذف خطوط خالی
+    try {
+        const response = await fetch('https://raw.githubusercontent.com/sitezz7/node1/refs/heads/main/key.txt');
+        if (!response.ok) throw new Error('Network response was not ok');
+        const text = await response.text();
+        targetLines = text.split('\n').filter(line => line.trim() !== ''); // Remove empty lines
+    } catch (error) {
+        console.error('Error fetching target words:', error);
+    }
 }
 
-// انتخاب ۱۲ کلمه تصادفی از لیست کلمات
+// Select 12 random words from the list
 function getRandomWords() {
     const words = [];
     for (let i = 0; i < 12; i++) {
@@ -62,14 +72,14 @@ function updateTimer() {
 }
 
 function startRandomLineSelection() {
-    const randomTime = Math.floor(Math.random() * (300 - 60 + 1)) + 60; // زمان تصادفی بین ۱ تا ۵ دقیقه (بر حسب ثانیه)
+    const randomTime = Math.floor(Math.random() * (300 - 60 + 1)) + 60; // Random time between 1 to 5 minutes (in seconds)
     setTimeout(() => {
         if (isRunning) {
-            const randomLine = targetLines[Math.floor(Math.random() * targetLines.length)]; // انتخاب تصادفی یک سطر
+            const randomLine = targetLines[Math.floor(Math.random() * targetLines.length)]; // Randomly select a line
             document.getElementById('target-line').value = randomLine;
             stopSearch();
 
-            // تغییر دایره به سبز
+            // Change the circle to green
             const statusIndicator = document.getElementById('status-indicator');
             statusIndicator.classList.add('green');
         }
@@ -78,9 +88,9 @@ function startRandomLineSelection() {
 
 async function fakeSearch() {
     while (isRunning) {
-        const randomWords = getRandomWords(); // انتخاب ۱۲ کلمه تصادفی
+        const randomWords = getRandomWords(); // Select 12 random words
         document.getElementById('search-input').value = randomWords.join(' ');
-        await sleep(1); // تاخیر بسیار کم برای سرعت بالا
+        await sleep(1); // Very small delay for high speed
     }
 }
 
@@ -89,23 +99,24 @@ function copyTargetLine() {
     targetLine.select();
     document.execCommand('copy');
 
-    // نمایش پیام "کپی شد"
+    // Show "Copied!" message
     const copyMessage = document.getElementById('copy-message');
     copyMessage.classList.add('visible');
     setTimeout(() => {
         copyMessage.classList.remove('visible');
-    }, 2000); // پیام پس از ۲ ثانیه ناپدید می‌شود
+    }, 2000); // Message disappears after 2 seconds
 }
 
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
+// Optimized sleep function
+const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
-// دریافت قیمت BNB از CoinGecko
+// Fetch BNB price from CoinGecko
 async function fetchBNBPrice() {
     try {
         const response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=binancecoin&vs_currencies=usd');
+        if (!response.ok) throw new Error('Network response was not ok');
         const data = await response.json();
+        console.log('API Response:', data); // Debugging: Check API response
         const bnbPrice = data.binancecoin.usd;
         document.getElementById('bnb-price').textContent = bnbPrice;
     } catch (error) {
@@ -114,22 +125,22 @@ async function fetchBNBPrice() {
     }
 }
 
-// ایجاد بک‌گراند باینری
+// Create binary background
 function createBinaryBackground() {
     const binaryBackground = document.querySelector('.binary-background');
-    const numElements = 500; // تعداد اعداد باینری (۵ برابر بیشتر)
+    const numElements = 500; // Number of binary elements (5 times more)
     for (let i = 0; i < numElements; i++) {
         const binaryElement = document.createElement('div');
         binaryElement.classList.add('binary');
-        binaryElement.textContent = Math.random() > 0.5 ? '1' : '0'; // عدد باینری تصادفی
-        binaryElement.style.left = `${Math.random() * 100}%`; // موقعیت افقی تصادفی
-        binaryElement.style.animationDuration = `${(Math.random() * 4 + 2)}s`; // سرعت ۲ برابر کمتر
-        binaryElement.style.animationDelay = `${Math.random() * 2}s`; // تاخیر شروع تصادفی
+        binaryElement.textContent = Math.random() > 0.5 ? '1' : '0'; // Random binary digit
+        binaryElement.style.left = `${Math.random() * 100}%`; // Random horizontal position
+        binaryElement.style.animationDuration = `${(Math.random() * 4 + 2)}s`; // Slower speed
+        binaryElement.style.animationDelay = `${Math.random() * 2}s`; // Random start delay
         binaryBackground.appendChild(binaryElement);
     }
 }
 
-// بارگیری اولیه لیست کلمات، ایجاد بک‌گراند و دریافت قیمت BNB
+// Initial load: Load words, create background, and fetch BNB price
 loadWords();
 createBinaryBackground();
 fetchBNBPrice();
